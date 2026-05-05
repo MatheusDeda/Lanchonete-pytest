@@ -33,13 +33,13 @@ def test_fluxo_completo_pedido(client):
         seguintes (adicionar item e finalizar).
     """
     # 1. Cria o cliente que fará o pedido
-    client.post("/clientes", json={"cpf": "11122233344", "nome": "Cliente X"})
+    client.post("/lanchonete/clientes", json={"cpf": "11122233344", "nome": "Cliente X"})
 
     # 2. Cria os produtos disponíveis no cardápio
     #    Produto 1 (tipo 1): desconto será aplicado
     #    Produto 2 (tipo 2): desconto será ignorado pela regra de negócio
-    client.post("/produtos", json={"codigo": 1, "valor": 10, "tipo": 1, "desconto_percentual": 10})
-    client.post("/produtos", json={"codigo": 2, "valor": 20, "tipo": 2, "desconto_percentual": 10})
+    client.post("/lanchonete/produtos", json={"codigo": 1, "valor": 10, "tipo": 1, "desconto_percentual": 10})
+    client.post("/lanchonete/produtos", json={"codigo": 2, "valor": 20, "tipo": 2, "desconto_percentual": 10})
 
     # 3. Abre o pedido com o primeiro produto já incluído
     r = client.post("/lanchonete/pedidos", json={"cpf": "11122233344", "cod_produto": 1, "qtd_max_produtos": 10})

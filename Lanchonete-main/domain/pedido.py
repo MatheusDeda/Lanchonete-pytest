@@ -83,7 +83,9 @@ class Pedido:
         return float(total)
     
     def cancelar(self) -> bool:
-                if self.esta_entregue:
-                    return False
-                self .esta_cancelado = True
-                return True
+        """Cancela o pedido se ele não estiver entregue."""
+        if self.esta_entregue:
+            return False
+        
+        self.esta_cancelado = True # Removido o espaço extra
+        return True

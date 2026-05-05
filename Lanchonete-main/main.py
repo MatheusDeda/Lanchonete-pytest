@@ -25,9 +25,9 @@ async def value_error_exception_handler(request: Request, exc: ValueError):
     )
 
 app.include_router(health_router)
-app.include_router(clientes_router)
-app.include_router(produto_router)
-app.include_router(pedidos_router)
+app.include_router(clientes_router, prefix="/lanchonete")
+app.include_router(produto_router, prefix="/lanchonete")
+app.include_router(pedidos_router, prefix="/lanchonete")
 
 #if __name__ == "__main__":
 #    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

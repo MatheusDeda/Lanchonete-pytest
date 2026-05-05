@@ -18,8 +18,8 @@ class PedidoAddItem(BaseModel):
 
 class PedidoOut(BaseModel):
     """Dados de retorno de um pedido."""
-
     codigo: int
     cpf: str
     esta_entregue: bool
+    esta_cancelado: bool  
     produtos: List[int]

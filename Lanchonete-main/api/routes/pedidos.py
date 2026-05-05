@@ -4,7 +4,7 @@ from typing import Dict, Any
 from schemas.pedido import PedidoCreate, PedidoAddItem, PedidoOut
 from services.lanchonete_service import service
 
-router = APIRouter(prefix="/lanchonete/pedidos", tags=["pedidos"])
+router = APIRouter(prefix="/pedidos", tags=["pedidos"])
 
 @router.post("", response_model=PedidoOut, status_code=status.HTTP_201_CREATED)
 def criar(payload: PedidoCreate):
@@ -72,14 +72,15 @@ def listar_pedidos_cancelados():
 @router.post("/{cod_pedido}/cancelar", status_code=status.HTTP_200_OK)
 def cancelar_pedido(cod_pedido: int) -> Dict[str, Any]:
     """Realiza o cancelamento lógico de um pedido."""
-    resultado = service.cancelar_pedido(cod_pedido)
+    pedido = service.cancelar_pedido(cod_pedido)
 
-    if not resultado:
+    if not pedido:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Pedido não encontrado, já entregue ou já cancelado"
         )
 
+    # O teste espera exatamente este dicionário:
     return {"ok": True, "mensagem": "Pedido cancelado com sucesso"}
 
 
